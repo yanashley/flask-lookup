@@ -1,3 +1,4 @@
+<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,14 +8,13 @@
     <body>
         
     <h1>{{ name }}</h1>
-    <h2>{{name}}, added by {{addedby}} was born on {{birthdate}}</h2>
+    <h2>{{name}}, added by {{addedby}}, was born on {{birthdate}}.</h2>
 
 
     <article> 
         <ol>
-            {% for person in people %}
-            <li>{{ person.name }} born on
-                {{ person.birthdate }}</li>
+            {% for movie in discography %}
+            <li> <a href= "{{ url_for('movie_lookup', tt = movie.tt) }}" > {{ movie.title }} </a></li>
             {% endfor %}
         </ol>
     </article>

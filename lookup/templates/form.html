@@ -1,0 +1,21 @@
+<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
+{% extends "base.html" %}
+
+{% block main_content %}
+<h1>{{kind}} matching {{query}}</h1>
+
+ <article> 
+        <ol>
+            {% if kind == "movie_title" %}
+                {% for item in result %}
+                <li> <a href= "{{ url_for('movie_lookup', tt = item.tt) }}" > {{ item.title }} </a></li>
+                {% endfor %}
+            {% elif kind == 'person_name' %}
+                {% for item in result %}
+                <li> <a href= "{{ url_for('person_lookup', nm = item.nm) }}" >{{ item.name }} </a> </li>
+                {% endfor %}
+            {% endif %}
+        </ol>
+    </article>
+
+{% endblock %}

@@ -18,6 +18,20 @@ def person_lookup(conn,nm):
     
     return curs.fetchone()
 
+def discography_lookup(conn,nm):
+    """Grabs the movies information such as title release date and more information about the movie"""
+    # print(f"This is tt {tt}")
+    #if conn is None:
+    curs = dbi.dict_cursor(conn)
+    curs.execute('''
+        select nm, m.tt, m.title
+        from credit c
+        join movie m on c.tt=m.tt
+        where nm= %s''',
+        [nm])
+    
+    return curs.fetchall()
+
 def movie_lookup(conn,tt):
     """Grabs the movies information such as title release date and more information about the movie"""
     print(f"This is tt {tt}")
@@ -45,7 +59,25 @@ def cast_lookup(conn,tt):
     
     return curs.fetchall()
 
+def form_lookup(conn, query, kind):
+    '''Return list of actors or movies that match the search query'''
+    curs = dbi.dict_cursor(conn)
+    if kind == 'movie_title':
+        pattern = '%'+query + '%'
+        curs.execute('''
+        select tt, title from movie
+        where title like %s''',
+        [pattern])
+    else:
+        pattern = '%'+query + '%'
+        curs.execute('''
+        select nm, name from person
+        where name like %s''',
+        [pattern])
+    return curs.fetchall()
+    
 
+    
 if __name__ == '__main__':
     dbi.conf("wmdb")
     conn=dbi.connect()

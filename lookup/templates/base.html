@@ -1,3 +1,4 @@
+<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 <!doctype html>
 <html lang='en'>
 <head>
@@ -9,7 +10,22 @@
     <link rel='stylesheet' href="{{url_for('static', filename = 'style.css')}}">
     {% block head_stuff %} {% endblock %}
 </head>
+
 <body>
+<form method="GET" action="{{url_for('dummy')}}">
+  <label> search 
+    <input type = "text", required name = 'search'><br>
+  </label>
+
+  <label>
+    <select name = "kind" required>
+      <option value>choose one</option>
+      <option value="movie_title">movie title</option>
+      <option value="person_name">person name</option>
+    </select>
+  </label>
+    <input type="submit">
+</form> 
 
 {% block nav %}
 <nav>

@@ -1,3 +1,4 @@
+<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +14,7 @@
     <article> 
         <ol>
             {% for person in cast%}
-            <li>{{ person.name }}</li>
+            <li> <a href= "{{ url_for('person_lookup', nm = person.nm) }}" > {{ person.name }} </a></li>
             {% endfor %}
         </ol>
     </article>

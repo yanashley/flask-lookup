@@ -1,3 +1,4 @@
+#By Ruth Perjuste, Sophie Lin, Ashley Yang x
 from flask import (Flask, render_template, make_response, url_for, request,
                    redirect, flash, session, send_from_directory, jsonify)
 from werkzeug.utils import secure_filename
@@ -6,6 +7,15 @@ app = Flask(__name__)
 import secrets
 import cs304dbi as dbi
 import methods
+
+@app.route('/dummy')
+def dummy():
+    conn=dbi.connect()
+    query = request.args['search']
+    kind = request.args['kind']
+    form_result = methods.form_lookup(conn, query, kind)
+    return render_template('form.html', page_title='Query Page', query = query, kind =kind, result = form_result)
+    #('''You submitted {query} and {kind}'''.format(query = query, kind= kind))
 
 #This is our starter page
 @app.route('/')
@@ -17,10 +27,12 @@ def person_lookup(nm):
     nm_num=int(nm)
     conn=dbi.connect()
     person=methods.person_lookup(conn,nm_num)
+    discography=methods.discography_lookup(conn, nm_num)
     return render_template('people.html', 
                             name=person["name"],
                             addedby=person["s.name"],
-                            birthdate=person["birthdate"]
+                            birthdate=person["birthdate"],
+                            discography=discography
                             )
 
 @app.route('/tt/<tt>')
