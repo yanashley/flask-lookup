@@ -17,7 +17,24 @@ def person_lookup(nm):
     nm_num=int(nm)
     conn=dbi.connect()
     person=methods.person_lookup(conn,nm_num)
-    return render_template('main.html', page_title='Main Page')
+    return render_template('people.html', 
+                            name=person["name"],
+                            addedby=person["s.name"],
+                            birthdate=person["birthdate"]
+                            )
+
+@app.route('/tt/<tt>')
+def movie_lookup(tt):
+    tt_num=int(tt)
+    conn=dbi.connect()
+    movie=methods.movie_lookup(conn,tt_num)
+    cast=methods.cast_lookup(conn,tt_num)
+    return render_template('movie.html', 
+                            title=movie["title"],
+                            release=movie["release"],
+                            cast=cast
+                            )
+
 
 
 if __name__ == '__main__':

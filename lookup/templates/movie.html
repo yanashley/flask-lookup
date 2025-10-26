@@ -6,15 +6,14 @@
     </head>
     <body>
         
-    <h1>{{ name }}</h1>
-    <h2>{{name}}, added by {{addedby}} was born on {{birthdate}}</h2>
-
+    <h1>{{ title }}</h1>
+    <h2>{{title}}, released in {{release}}</h2>
+    <h2>Cast:</h2>
 
     <article> 
         <ol>
-            {% for person in people %}
-            <li>{{ person.name }} born on
-                {{ person.birthdate }}</li>
+            {% for person in cast%}
+            <li>{{ person.name }}</li>
             {% endfor %}
         </ol>
     </article>
