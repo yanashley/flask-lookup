@@ -5,29 +5,20 @@ app = Flask(__name__)
 
 import secrets
 import cs304dbi as dbi
+import methods
 
-# we need a secret_key to use flash() and sessions
-app.secret_key = secrets.token_hex()
-
-# configure DBI
-
-# For Lookup, use 'wmdb'
-# For CRUD and Ajax, use your personal db
-# For project work, use your team db
-
-print(dbi.conf('ww123_db'))
-
-# This gets us better error messages for certain common request errors
-app.config['TRAP_BAD_REQUEST_ERRORS'] = True
-
+#This is our starter page
 @app.route('/')
 def index():
     return render_template('main.html', page_title='Main Page')
 
-@app.route('/about/')
-def about():
-    flash('this is a flashed message')
-    return render_template('about.html', page_title='About Us')
+@app.route('/nm/<nm>')
+def person_lookup(nm):
+    nm_num=int(nm)
+    conn=dbi.connect()
+    person=methods.person_lookup(conn,nm_num)
+    return render_template('main.html', page_title='Main Page')
+
 
 if __name__ == '__main__':
     import sys, os
@@ -37,5 +28,6 @@ if __name__ == '__main__':
         assert(port>1024)
     else:
         port = os.getuid()
+    dbi.conf("wmdb")
     app.debug = True
     app.run('0.0.0.0',port)
