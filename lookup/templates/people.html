@@ -1,8 +1,21 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Database People</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        
+    <h1>List of {{ desc }}</h1>
 
-{% block main_content %}
-<h1>Person</h1>
+    <article> 
+        <ol>
+            {% for person in people %}
+            <li>{{ person.name }} born on
+                {{ person.birthdate }}</li>
+            {% endfor %}
+        </ol>
+    </article>
+    </body>
 
-<p>Welcome to our app. This is the main page</p>
-
-{% endblock %}
+</html>
