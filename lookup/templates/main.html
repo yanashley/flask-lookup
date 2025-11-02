@@ -1,9 +1,11 @@
-<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
+<!-- By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 {% extends "base.html" %}
 
 {% block main_content %}
-<h1>Main</h1>
+<h1>About</h1>
 
-<p>Welcome to our app. This is the main page</p>
+<p>This application is a simple knockoff of the <a href="https://www.imdb.com" > IMDB </a> </p>
+<p> An example of an actor <a href= "{{ url_for('person_lookup', nm = 123) }}" > George Clooney </a> </p>
+<p> An example of a movie <a href= "{{ url_for('movie_lookup', tt = 120780) }}" > Out of Sight (1998) </a> </p>
 
 {% endblock %}

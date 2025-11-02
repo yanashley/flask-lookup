@@ -1,4 +1,4 @@
-<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
+<!-- By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 <!doctype html>
 <html lang='en'>
 <head>
@@ -12,26 +12,31 @@
 </head>
 
 <body>
-<form method="GET" action="{{url_for('dummy')}}">
-  <label> search 
-    <input type = "text", required name = 'search'><br>
-  </label>
 
-  <label>
-    <select name = "kind" required>
-      <option value>choose one</option>
-      <option value="movie_title">movie title</option>
-      <option value="person_name">person name</option>
+  <div class="form_search">
+  
+
+  <form method="GET" action="{{ url_for('query') }}" id="inline_form">
+
+    <img src="{{ url_for('static', filename='free_movie_icon.png') }}">
+
+    <label for="input_box">Search:</label><br>
+
+    <input id="input_box" type="text" name="query" required>
+    <select id="drop_options" name="kind" required>
+      <option value="">choose one</option>
+      <option value="movie">movie title</option>
+      <option value="person">person name</option>
     </select>
-  </label>
-    <input type="submit">
-</form> 
+    <input id="search" type="submit" value="Search">
+  </form>
+</div>
 
 {% block nav %}
-<nav>
-  <ul>
-    <li><a href="{{url_for('index')}}">Home</a></li>
-  </ul>
+<nav >
+  
+  <a href="{{url_for('index')}}">Home</a>
+  
 </nav>
 {% endblock %}
 

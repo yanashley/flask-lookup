@@ -1,4 +1,4 @@
-#By Ruth Perjuste, Sophie Lin, Ashley Yang x
+# By Ruth Perjuste, Sophie Lin, Ashley Yang
 from flask import (Flask, render_template, make_response, url_for, request,
                    redirect, flash, session, send_from_directory, jsonify)
 from werkzeug.utils import secure_filename
@@ -8,22 +8,40 @@ import secrets
 import cs304dbi as dbi
 import methods
 
-@app.route('/dummy')
-def dummy():
-    conn=dbi.connect()
-    query = request.args['search']
+@app.route('/query/')
+def query():
+    """
+    A function to find and show movies or persons matching the search bar form query.
+    """
+    conn=dbi.connect()  
+    query = request.args['query']
     kind = request.args['kind']
     form_result = methods.form_lookup(conn, query, kind)
-    return render_template('form.html', page_title='Query Page', query = query, kind =kind, result = form_result)
-    #('''You submitted {query} and {kind}'''.format(query = query, kind= kind))
+    #if only one result, show page directly; otherwise lookup
+    if len(form_result) == 1:
+        if kind == 'movie':
+            return redirect(url_for('movie_lookup', tt=form_result[0]['tt']))
+        else:
+            return redirect(url_for('person_lookup', nm=form_result[0]['nm']))
+    else:
+        return render_template('form.html', page_title='Query Page', query = query, kind =kind, result = form_result)
 
 #This is our starter page
 @app.route('/')
 def index():
+    """
+    A function to show the home page of the app.
+    """
     return render_template('main.html', page_title='Main Page')
 
 @app.route('/nm/<nm>')
 def person_lookup(nm):
+    """
+    A function to lookup and show a person's database info based on their nm.
+
+    Parameters:
+        nm: a string representing the unique id of a person.
+    """
     nm_num=int(nm)
     conn=dbi.connect()
     person=methods.person_lookup(conn,nm_num)
@@ -37,6 +55,12 @@ def person_lookup(nm):
 
 @app.route('/tt/<tt>')
 def movie_lookup(tt):
+    """
+    A function to lookup and show a movie's database info based on their tt.
+
+    Parameters:
+        tt: a string representing the unique id of a movie.
+    """
     tt_num=int(tt)
     conn=dbi.connect()
     movie=methods.movie_lookup(conn,tt_num)
@@ -46,8 +70,6 @@ def movie_lookup(tt):
                             release=movie["release"],
                             cast=cast
                             )
-
-
 
 if __name__ == '__main__':
     import sys, os

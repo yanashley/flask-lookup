@@ -1,21 +1,30 @@
-<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
+<!-- By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
 {% extends "base.html" %}
 
 {% block main_content %}
 <h1>{{kind}} matching {{query}}</h1>
 
- <article> 
+ <div class="container_list">  
         <ol>
-            {% if kind == "movie_title" %}
-                {% for item in result %}
-                <li> <a href= "{{ url_for('movie_lookup', tt = item.tt) }}" > {{ item.title }} </a></li>
-                {% endfor %}
-            {% elif kind == 'person_name' %}
-                {% for item in result %}
-                <li> <a href= "{{ url_for('person_lookup', nm = item.nm) }}" >{{ item.name }} </a> </li>
-                {% endfor %}
+        <!-- check for length 0, 1, >1 --> 
+            {% if kind == "movie" %}
+                {% if result | length == 0 %}
+                    <h2>Sorry, no movie with that ID is in the database</h2>
+                {% else %}
+                    {% for item in result %}
+                    <li> <a href= "{{ url_for('movie_lookup', tt = item.tt) }}" > {{ item.title }} released in {{ item.release }} </a></li>
+                    {% endfor %}
+                {% endif %}
+            {% elif kind == 'person' %}
+                {% if result | length == 0 %}
+                    <h2>Sorry, no person with that ID is in the database</h2>
+                {% else %}
+                    {% for item in result %}
+                    <li> <a href= "{{ url_for('person_lookup', nm = item.nm) }}" >{{ item.name }} born on {{ item.birthdate }} </a> </li>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         </ol>
-    </article>
+    </div>
 
 {% endblock %}

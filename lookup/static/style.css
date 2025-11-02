@@ -1,3 +1,4 @@
+/* By Ruth Perjuste, Sophie Lin, Ashley Yang*/
 /* the --color-header and others are CSS variables, which we access later. 
    I chose these colors using https://venngage.com/tools/accessible-color-palette-generator
    I liked the contrasting palette2 colors.
@@ -37,52 +38,99 @@ h1 {
     
 
 /* for a simple navbar. Talk to Scott if you want drop-downs. */
-nav > ul {
-    display: flex;
-    flex-direction: row;
+
+
+
+
+
+nav {
+    border: 2px solid;
+    width: fit-content;
+    margin: 0 auto;
+    align-items: center;
+    padding: 7px;
+    border-radius: 10px;
+    margin-top: 10px; 
+    background-color: #0073e6;
+    color: black; 
+    text-decoration: none;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+nav a{
+    text-decoration: none;
+    color: black;
 }
 
-nav > ul > li {
-    flex: 0 0 auto;
-    width: 15em; 
+
+
+#input_box{
+    border-radius: 10px ;
+    padding: 5px;
+}
+#drop_options{
+    align-items: center;
+    width: 150px;
+    padding: 10px;
+    font-size:60px;
+
 }
 
-nav button, nav a {
-    display: block;
-    box-sizing: border-box; /* easier to make button and A the same size */
-    width: 100%;
-    height: 40px;
-    padding: 0px;
-    padding-bottom: 5px;
-    background-color: var(--color-header);
-    color: var(--color-nav-fg);
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    /* Firefox uses font -apple-system unless I repeat the font spec here. */
-    font-family: var(--font-family);
-    font-weight: bold;
-    font-size: 1.4rem;
+body{
+    background-color: #e8dec3;
+}
+form{
+    margin: 0 auto;
+}
+.form_search{
+    width: fit-content;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 auto;
+    
+
+}
+#inline_form {
+  display: flex;
+  align-items: center;  
+  gap: 10px;           
+  justify-content: center;
+
 }
 
-/* Only the top-level buttons are centered; lower ones are left-aligned. */
-nav > ul > li > button , nav > ul > li > a {
+#search{
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#search:hover{
+    padding: 7px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #0073e6;
+}
+p{
+    text-align: center;
+
+}
+h1{
     text-align: center;
 }
 
-/* because of the margin trick, this can only be used for the last element */
-
-nav li.right {
-    margin-left: auto;
+.container_list {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.container_list ol{
+    display: inline-block;
+    text-align: left;
 }
 
-nav button:hover, button:focus, nav a:hover, nav a:focus {
-    background-color: var(--color-focus);
+img{
+    width: 100px;
+    height: auto;
 }
-

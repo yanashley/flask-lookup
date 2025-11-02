@@ -1,23 +1,18 @@
-<!-- #By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Database People</title>
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
-    <body>
-        
-    <h1>{{ name }}</h1>
-    <h2>{{name}}, added by {{addedby}}, was born on {{birthdate}}.</h2>
+<!-- By Ruth Perjuste, Sophie Lin, Ashley Yang --> 
+{% extends "base.html" %}
 
+{% block main_content %} 
 
-    <article> 
+    <h1 class="person"> {{ name }} </h1>
+    <p>{{name}}, added by {{addedby}}, was born on {{birthdate}}.<p>
+    <p> Appeared in:</p>
+
+    <div class="container_list"> 
         <ol>
             {% for movie in discography %}
-            <li> <a href= "{{ url_for('movie_lookup', tt = movie.tt) }}" > {{ movie.title }} </a></li>
+            <li> <a href= "{{ url_for('movie_lookup', tt = movie.tt) }}" > {{ movie.title }} ({{ movie.release }})</a></li>
             {% endfor %}
         </ol>
-    </article>
-    </body>
+    </div>
 
-</html>
+{% endblock %}
